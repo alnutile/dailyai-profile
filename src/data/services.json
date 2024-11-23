@@ -1,0 +1,32 @@
+[
+  {
+    "icon": "Puzzle",
+    "title": "Analyze your Workflows",
+    "description": "I'll analyze your workflows to find where AI automation fits and provide real-world examples to illustrate the potential."
+  },
+  {
+    "icon": "BarChart",
+    "title": "Replace Repetitive Tasks",
+    "description": "We'll automate tasks with AI, reducing effort, saving time, and boosting efficiency. I'll provide ready-made workflows you can use now."
+  },
+  {
+    "icon": "FileText",
+    "title": "Content Generation & Reuse",
+    "description": "I'll show examples of AI-generated content and help identify where automatic content generation fits into your workflows."
+  },
+  {
+    "icon": "Users",
+    "title": "Marketing Campaigns",
+    "description": "Kickstart your creative copy with AI. Auto-publish cross-channel messaging based on sales, customer interactions. We've already integrated with most major channels."
+  },
+  {
+    "icon": "Maximize",
+    "title": "Standards-Based Content",
+    "description": "Auto-generate content based on templates, standards, or guidelines, such as SEO for websites, tenders, bids, RFP/RFQ responses, sales pitches, or GxP documents."
+  },
+  {
+    "icon": "Zap",
+    "title": "Data Aggregation & Analysis",
+    "description": "Fast data turnaround! Aggregate data from multiple sources, auto-analyze the data, and auto-generate actionable insights and tasks from it."
+  }
+]

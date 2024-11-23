@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Kick-off Plan",
+    "price": "$3,000",
+    "description": "Perfect if you have in-house tech folks that can implement the automation plan I give you.",
+    "features": [
+      "This plan includes 8 hours of observation and planning together (typically 4 x 2hr blocks)",
+      "I'll meet with 1-3 key team members to understand your workflows and identify automation opportunities",
+      "From these sessions, I'll create an actionable automation plan",
+      "The plan will contain full implementation options that you can easily implement yourself",
+      "We'll have a 1.5 hour wrap-up meeting to review the plan together"
+    ],
+    "buttonText": "Get started",
+    "buttonLink": "https://calendly.com/alfrednutile/kick-off-plan-observation-quote"
+  },
+  {
+    "name": "Full Implementation",
+    "price": "Talk to me!",
+    "description": "If you want me to fully implement the automation plan too. Everything in the Kick-off plan, and:",
+    "features": [
+      "If you choose full implementation at the start, I'll give you a 50% discount on the Kick-off plan",
+      "I'll implement agreed parts or all of the automation for you for an agreed rate",
+      "The automation plan will include a proposed timeline for implementation that we can discuss and agree on",
+      "My solutions are easily adaptable and extendable, and low-code",
+      "My solutions can be easily plugged into third-party tools and products"
+    ],
+    "buttonText": "Get started",
+    "buttonLink": "https://calendly.com/alfrednutile/kick-off-plan-observation-quote-clone"
+  }
+]

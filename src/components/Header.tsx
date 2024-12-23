@@ -19,7 +19,7 @@ export default function Header() {
               alt="DailyAI.Studio" 
               className="h-8 w-auto rounded-md"
             />
-            <span className="ml-2 text-xl font-bold">DailyAI.Studio</span>
+            <span className="ml-2 text-xl font-bold text-custom-pink">DailyAI.Studio</span>
           </Link>
           
           {/* Mobile menu button */}

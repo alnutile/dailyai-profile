@@ -27,8 +27,8 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
               <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
                 <p className="text-gray-600">© Copyright 2024 Alfred Nutile</p>
-                <a href="/privacy" className="text-gray-600 hover:text-gray-900">Privacy Policy</a>
-                <a href="/terms" className="text-gray-600 hover:text-gray-900">Terms of Service</a>
+                <a href="/privacy-policy" className="text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                <a href="/terms-of-service" className="text-gray-600 hover:text-gray-900">Terms of Service</a>
               </div>
               <div className="flex space-x-6">
                 <a 

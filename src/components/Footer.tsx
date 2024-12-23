@@ -25,7 +25,11 @@ export default function Footer() {
 
           <div className="pt-12 border-t border-gray-200">
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-              <p className="text-gray-600">© Copyright 2024 Alfred Nutile</p>
+              <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                <p className="text-gray-600">© Copyright 2024 Alfred Nutile</p>
+                <a href="/privacy" className="text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                <a href="/terms" className="text-gray-600 hover:text-gray-900">Terms of Service</a>
+              </div>
               <div className="flex space-x-6">
                 <a 
                   href="https://www.linkedin.com/in/alfrednutile/"

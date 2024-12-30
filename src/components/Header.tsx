@@ -13,7 +13,7 @@ export default function Header() {
     <nav className="bg-white shadow-sm relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center mx-auto md:mx-0">
             <img 
               src="/logo.png" 
               alt="DailyAI.Studio" 
@@ -22,9 +22,9 @@ export default function Header() {
             <span className="ml-2 text-xl font-bold text-custom-pink">DailyAI.Studio</span>
           </Link>
           
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="absolute right-4 md:hidden">
             <button 
+              type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-gray-900"
             >

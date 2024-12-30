@@ -37,6 +37,8 @@ export default function Header() {
             <a href={getNavLink('what-i-offer')} className="text-gray-700 hover:text-gray-900">What I offer</a>
             <a href={getNavLink('pricing')} className="text-gray-700 hover:text-gray-900">Pricing</a>
             <a href={getNavLink('testimonials')} className="text-gray-700 hover:text-gray-900">Testimonials</a>
+            <Link to="/privacy-policy" className="text-gray-700 hover:text-gray-900">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="text-gray-700 hover:text-gray-900">Terms</Link>
             <a 
               href="https://calendly.com/alfrednutile/free-intro-consultation"
               target="_blank"
@@ -74,6 +76,20 @@ export default function Header() {
             >
               Testimonials
             </a>
+            <Link 
+              to="/privacy-policy" 
+              className="text-gray-700 hover:text-gray-900 py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Privacy Policy
+            </Link>
+            <Link 
+              to="/terms-of-service" 
+              className="text-gray-700 hover:text-gray-900 py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Terms
+            </Link>
             <a 
               href="https://calendly.com/alfrednutile/free-intro-consultation"
               target="_blank"

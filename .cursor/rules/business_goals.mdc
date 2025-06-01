@@ -1,0 +1,59 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Solutions examples and cards
+
+This is an older site done in VITE
+We typically use next
+
+in this case I want to use supabase and render the page /solutions (a new page)
+
+and that will query the supabase table 
+
+when you are done we will have a new page using the same style (even though I like daisyui this stie is already setup a certain why
+
+and that page will have full width cards to show the following data (as seen in the image)
+
+@cards.png 
+
+the database scheme is 
+create table public.usecases (
+  "Rough Draft" text null,
+  "Quote" jsonb null,
+  "If You Are" text null,
+  "Source" text null,
+  "URL" text null,
+  "Time_Saved" text null,
+  "Monthly_Cost" text null,
+  "Ai" text null,
+  "Automation Tools" text null,
+  id uuid not null default gen_random_uuid (),
+  verified_at timestamp without time zone null,
+  valid booll null,
+  qr_code_url text null,
+  constraint usecases_pkey primary key (id),
+  constraint usecases_id_key unique (id)
+) TABLESPACE pg_default;
+
+and the card is made up of each field
+
+here are the fields you care about
+## Quote
+we saved 10 hours weekly using ai and automation to summarize meeting notes
+- Smalltown City Clerk, [towname.gov]
+
+## If You Are
+Are you writing grants?
+
+## Time Saved and other data (if null add n/a)
+Time_Saved
+Monthly_Cost
+Ai 
+Automation Tools
+
+The QR Code I will be null for now but you can get it from the column qr_code_url
+
+
+And the url under it is marketing so it is just always taht

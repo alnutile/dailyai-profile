@@ -1,0 +1,159 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 🤖 Build and Development Rules
+
+ALWAYS use the mcp to get ideas on how to move foward before searching the internet
+
+This document defines the technical standards for building the Travel Insiders platform.
+
+It does **not** define business logic (which is documented separately).
+
+## Query the database using the mcp 
+**self_hosted_supabase**
+
+## IDs are always UUID
+
+---
+
+## 🚀 Overview
+- UI: **Next.js** (App Directory, TypeScript, Tailwind, daisyUI, Supabase UI)
+- Database: **Supabase (Postgres)** — all queries through Supabase SDK.
+- Automation: **n8n.io** (called via Supabase functions when needed).
+
+All CLI operations use `npx`.
+
+---
+
+# 🛠️ Global NEVERS and ALWAYs
+
+## NEVER:
+- ❌ Write SQL migrations manually.  
+  Use Supabase migrations and CLI tools only.
+- ❌ Hardcode URLs, tokens, or environment-specific values.  
+  Load them from `.env` files only at runtime.
+- ❌ Use raw SQL connections inside Next.js apps.
+- ❌ Use modals or slideouts for CRUD views.
+- ❌ Use shadcn as the default UI library—use daisyUI first.
+- ❌ Write custom CSS for components that can be built with daisyUI and Tailwind utilities.
+
+## ALWAYS:
+- ✅ Use `npx supabase` for database schema changes, migrations, functions.
+- ✅ Use **daisyUI** for all UI components and styling. Only use shadcn or custom components if daisyUI is missing a required component.
+- ✅ Use Supabase UI components for authentication and avatars.
+- ✅ Use Supabase SDK (`@supabase/supabase-js`) for all database operations.
+- ✅ Load all sensitive credentials via `.env` files.
+- ✅ Use path-based routing for resources (no nested modals).
+- ✅ Use Tailwind utility classes to customize daisyUI components. Avoid custom CSS unless absolutely necessary.
+
+---
+
+# 🔥 UI Conventions
+
+- **Resource Routes:**
+  - Create: `/resource/create`
+  - View: `/resource/[uuid]`
+  - Edit: `/resource/[uuid]/edit`
+
+Example:
+- `/tasks/create`
+- `/tasks/7ff1bcbc-df0c-482b-89c8-391aac2521cf`
+- `/tasks/7ff1bcbc-df0c-482b-89c8-391aac2521cf/edit`
+
+- **Avatar**: Use Supabase Avatar component.  
+- **File Upload**: Use daisyUI file input, or Supabase DropZone if needed.
+
+---
+
+# 🗄️ Database & Supabase
+
+- **Migrations**: 
+  - Always use `npx supabase db` commands.
+  - Example: `npx supabase db diff --local`.
+- **Local Dev**:
+  - Use local Supabase URLs and ports.
+  - Connect through the exposed firewall IP.
+
+Example `.env` pattern:
+
+```ts
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://project.supabase.co";
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "your-default-key";
+
+	•	Pull Schema:
+
+npx supabase db pull --db-url=postgresql://...
+
+	•	Seed Data:
+
+npx supabase db dump --data-only -f supabase/seed.sql
+npx supabase db reset --local
+
+
+
+⸻
+
+📚 CLI Rules
+	•	Migrations: npx supabase db diff
+	•	Push: npx supabase db push
+	•	Pull: npx supabase db pull
+	•	Reset Local: npx supabase db reset --local
+	•	Always pass the --local flag during development.
+
+⸻
+
+🚀 Deployment
+	•	Supabase deployment docs:
+https://supabase.com/docs/guides/deployment
+	•	Follow .env driven defaults for production settings.
+
+⸻
+
+🛑 Reminders
+	•	Supabase is the source of truth.
+	•	No direct database writes from N8N unless triggered through a Supabase Function.
+	•	No API routes that bypass Supabase SDK (no direct fetch to database endpoints).
+
+part of your company instantly.) 🔥
+
+
+
+## Auth 
+
+All auth is managed by Supabase UI components so no form writing is needed.
+
+---
+
+# 🖌️ daisyUI Usage
+
+- **Install:**  
+  - `npm i -D daisyui@latest`
+  - Add `@plugin "daisyui";` to your CSS file.
+- **Component Usage:**  
+  - Use daisyUI class names for all UI elements (see [daisyUI docs](mdc:https:/daisyui.com/components)).
+  - Customize with Tailwind utility classes as needed.
+- **Themes:**  
+  - Use daisyUI's built-in themes for light/dark mode and branding.
+- **No Custom CSS:**  
+  - Only use custom CSS if you cannot achieve the design with daisyUI and Tailwind.
+- **Fallback:**
+  - If a component is not available in daisyUI, you may use shadcn or build a custom component with Tailwind utilities.
+
+---
+
+# 📚 Further Reading
+
+- [daisyUI Docs](mdc:https:/daisyui.com)
+- [daisyUI Theme Generator](mdc:https:/daisyui.com/theme-generator)
+- [Tailwind CSS Docs](mdc:https:/tailwindcss.com/docs/utility-first)
+
+---
+
+**Summary:**  
+Use daisyUI as your primary UI component library, customizing with Tailwind utilities. Only use shadcn or custom components if daisyUI does not provide what you need. Always follow Supabase and Next.js best practices for authentication, routing, and environment configuration.
+
+
+
+## Kick off a project

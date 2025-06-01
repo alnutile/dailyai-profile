@@ -1,0 +1,93 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+The form will save text using the supabase key secret and the the schema is 
+
+```
+create table
+  public.meeting_notes (
+    id bigint generated always as identity not null,
+    notes text not null,
+    transposed_notes text not null,
+    user_id uuid not null,
+    status text null default 'pending'::text,
+    constraint meeting_notes_pkey primary key (id),
+    constraint meeting_notes_user_id_fkey foreign key (user_id) references auth.users (id)
+  ) tablespace pg_default;
+```
+
+## RLS
+
+
+```
+-- Allow authenticated users to insert records into meeting_notes
+CREATE POLICY "Authenticated users can insert records" ON public.meeting_notes FOR INSERT TO authenticated
+WITH
+  CHECK (TRUE);
+
+-- Allow authenticated users to select their own records
+CREATE POLICY "Authenticated users can select their own records" ON public.meeting_notes FOR
+SELECT
+  TO authenticated USING (
+    (
+      SELECT
+        auth.uid ()
+    ) = user_id
+  );
+
+-- Allow authenticated users to delete their own records
+CREATE POLICY "Authenticated users can delete their own records" ON public.meeting_notes FOR DELETE TO authenticated USING (
+  (
+    SELECT
+      auth.uid ()
+  ) = user_id
+);
+```
+
+Then the uuid becomes the /:uuid path they can see and share
+
+
+lets make this code to use the supabse client to write the data to the database
+
+lets use supabase authenticated auth so the user is autenticated the moment they come to the site
+
+the record can only be seen by that user
+
+## Example code to do anon auth insert
+
+// Ensure anonymous auth on mount
+  useEffect(() => {
+    let ignore = false;
+    async function ensureAnonAuth() {
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log('Session:', session);
+      if (!session) {
+        const { error } = await supabase.auth.signInAnonymously();
+        if (!ignore && error) setError(error.message);
+      }
+    }
+    ensureAnonAuth();
+    return () => { ignore = true; };
+  }, [supabase]);
+
+  const handleSubmit = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      // Insert into shareit table
+      const { data, error } = await supabase
+        .from("shareit")
+        .insert([{ content }])
+        .select("uuid")
+        .single();
+      if (error) throw error;
+      // Redirect to the new secret page
+      router.push(`/secrets/${data.uuid}`);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };

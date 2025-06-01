@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+      "Activepieces": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "mcp-remote",
+          "https://ap-daily.apps.thedailyaistudio.com/api/v1/mcp/V0VF6Yyl7a4NYVJHB2S8i/sse"
+        ]
+      }
+    }
+  }

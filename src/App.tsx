@@ -9,6 +9,7 @@ import Plans from './components/Plans';
 import Footer from './components/Footer';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
+import SolutionsPage from './components/SolutionsPage';
 
 function HomePage() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/terms-of-service" element={<Terms />} />
+          <Route path="/solutions" element={<SolutionsPage />} />
         </Routes>
         <Footer />
       </div>

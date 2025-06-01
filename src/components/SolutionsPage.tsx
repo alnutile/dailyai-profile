@@ -10,6 +10,7 @@ interface UseCase {
   Time_Saved: string | null;
   Monthly_Cost: string | null;
   Ai: string | null;
+  URL: string | null;
   "Automation Tools": string | null;
   qr_code_url: string | null;
 }
@@ -24,6 +25,7 @@ const SolutionsPage: React.FC = () => {
       const { data, error } = await supabase
         .from('usecases')
         .select('*')
+        .eq('valid', true)
         .order('verified_at', { ascending: false });
       if (!error && data) {
         setUseCases(data);
@@ -35,12 +37,15 @@ const SolutionsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-12 px-4">
+    <div className="w-full max-w-7xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-8 text-center">Solutions</h1>
+      <p className="text-center text-gray-500 mb-8">
+        This is a list of solutions from the web and work we have done for our clients.
+      </p>
       {loading ? (
         <div className="text-center">Loading...</div>
       ) : (
-        <div className="flex flex-col gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {useCases.map((uc) => (
             <div
               key={uc.id}
@@ -53,7 +58,9 @@ const SolutionsPage: React.FC = () => {
                   {uc.Quote || 'n/a'}
                 </div>
                 <div className="text-sm text-gray-500 mb-4">
-                  - {uc.Source || 'n/a'}
+                  - <a href={uc.URL || 'n/a'} 
+                  className="text-custom-pink underline"
+                  target="_blank" rel="noopener noreferrer">{uc.Source || 'n/a'}</a>
                 </div>
                 <div className="text-2xl font-bold mb-4">
                   {uc["If You Are"] || 'n/a'}
@@ -61,11 +68,11 @@ const SolutionsPage: React.FC = () => {
                 <div className="flex flex-col gap-1 mb-4">
                   <div className="flex items-center gap-2">
                     <span role="img" aria-label="clock">🕒</span>
-                    <span className="font-semibold">Time Saved:</span> {uc.Time_Saved || 'n/a'}
+                    <span className="font-semibold">Time Saved:</span> {uc.Time_Saved ? `${uc.Time_Saved} hrs` : 'n/a'}
                   </div>
                   <div className="flex items-center gap-2">
                     <span role="img" aria-label="money">💲</span>
-                    <span className="font-semibold">Monthly Cost:</span> {uc.Monthly_Cost || 'n/a'}
+                    <span className="font-semibold">Monthly Cost:</span> {uc.Monthly_Cost ? (`From ${uc.Monthly_Cost.trim().startsWith('$') ? '' : '$'}${uc.Monthly_Cost}`) : 'n/a'}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">✔️ Ai Used</span>: {uc.Ai || 'n/a'}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
+import { Clipboard } from 'lucide-react';
 
 interface UseCase {
   id: string;
@@ -43,8 +44,10 @@ const SolutionsPage: React.FC = () => {
           {useCases.map((uc) => (
             <div
               key={uc.id}
-              className="w-full bg-white rounded-xl shadow-sm border-l-8 border-custom-pink p-8 flex flex-col md:flex-row items-start gap-8"
+              id={uc.id}
+              className="group relative w-full bg-white rounded-xl shadow-sm border-l-8 border-custom-pink p-8 flex flex-col md:flex-row items-start gap-8"
             >
+              <CopyLinkButton id={uc.id} />
               <div className="flex-1 min-w-0">
                 <div className="text-lg italic text-gray-700 mb-2">
                   {uc.Quote || 'n/a'}
@@ -77,6 +80,32 @@ const SolutionsPage: React.FC = () => {
         </div>
       )}
     </div>
+  );
+};
+
+const CopyLinkButton: React.FC<{ id: string }> = ({ id }) => {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopy = async () => {
+    const url = `${window.location.origin}/solutions#${id}`;
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="absolute top-4 right-4 p-2 rounded-full bg-white hover:bg-gray-100 border border-gray-200 shadow transition-opacity opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus:opacity-100"
+      title="Copy link to this card"
+      style={{ zIndex: 10 }}
+    >
+      {copied ? (
+        <span className="text-xs text-custom-pink font-semibold">Copied!</span>
+      ) : (
+        <Clipboard className="w-5 h-5 text-gray-400 hover:text-custom-pink" />
+      )}
+    </button>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -24,6 +24,25 @@ function HomePage() {
 }
 
 function App() {
+  useEffect(() => {
+    // Create the script element
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.innerHTML = `
+      import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+      Chatbot.init({
+        chatflowid: "af0f5974-e04c-4f17-8187-1e939dbbc813",
+        apiHost: "https://flowise.dailyai.studio",
+      });
+    `;
+    document.body.appendChild(script);
+
+    // Cleanup: remove script on unmount
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
